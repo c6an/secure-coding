@@ -1,0 +1,138 @@
+CTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}My Market{% endblock %}</title>
+    <style>
+        /* 페이스북 스타일 파란색 테마 */
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+        }
+        header {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        header a.logo {
+            font-weight: 700;
+            font-size: 24px;
+            text-decoration: none;
+            color: white;
+        }
+        nav a {
+            color: white;
+            margin-left: 20px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 960px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+        }
+        button, input[type="submit"] {
+            background-color: #1877f2;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button:hover, input[type="submit"]:hover {
+            background-color: #145dbf;
+        }
+        input[type="text"], input[type="password"], textarea {
+            width: 100%;
+            padding: 8px 10px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .flash {
+            background-color: #e7f3ff;
+            border-left: 6px solid #1877f2;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            color: #050505;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+            background: #fff;
+        }
+        .product-card h3 {
+            margin-top: 0;
+            color: #1877f2;
+        }
+        .product-card p {
+            font-size: 14px;
+            color: #333;
+        }
+        .profile-bio {
+            white-space: pre-wrap;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('index') }}" class="logo">MyMarket</a>
+        <nav>
+            {% if session.get('user_id') %}
+                <a href="{{ url_for('dashboard') }}">대시보드</a>
+                <a href="{{ url_for('profile') }}">프로필</a>
+                <a href="{{ url_for('logout') }}">로그아웃</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">로그인</a>
+                <a href="{{ url_for('register') }}">회원가입</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash">
+                    {% for msg in messages %}
+                        <div>{{ msg }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
+
+

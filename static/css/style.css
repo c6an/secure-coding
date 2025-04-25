@@ -1,0 +1,30 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #1877f2;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.btn-primary {
+    background-color: #1877f2;
+    border-color: #1877f2;
+}
+
+.btn-primary:hover {
+    background-color: #165ec9;
+    border-color: #165ec9;
+}
+
+footer {
+    font-size: 0.9rem;
+    color: #65676b;
+}
+

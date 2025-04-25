@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}홈 | hackerMarket{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4 fw-bold mb-3">환영합니다, hackerMarket에 오신 것을 환영합니다!</h1>
+    <p class="lead mb-4">당근 마켓 아님 배추마켓</p>
+    {% if not session.get('user_id') %}
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2">로그인</a>
+        <a href="{{ url_for('register') }}" class="btn btn-outline-primary btn-lg">회원가입</a>
+    {% else %}
+        <a href="{{ url_for('dashboard') }}" class="btn btn-success btn-lg">대시보드로 이동</a>
+    {% endif %}
+</div>
+{% endblock %}
